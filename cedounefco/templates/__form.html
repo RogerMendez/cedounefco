@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% block content-form %}{% endblock %}
+<div class="row">
+    <form action="" method="post" class="col s7">{% csrf_token %}
+        <fieldset>
+            <legend>
+                {% block legend %}
+                    Formulario
+                {% endblock %}
+            </legend>
+            {% block cuerpo-form %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="mypadding2 bg-red fg-white margin10 no-margin-right no-margin-left">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ field }}
+                                {{ field.label_tag }}
+                                {% if field.help_text %}
+                                    <p class="category">{{ field.help_text|safe }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
+            <input type="submit" class="waves-effect waves-green btn" value="{% block submit %}Guardar{% endblock %}">
+            <a href="" type="submit" class="waves-effect waves-red btn">{% block cancel %}Cancelar{% endblock %}</a>
+        </fieldset>
+    </form>
+    <div class="co s5"></div>
+</div>
+{% endblock %}

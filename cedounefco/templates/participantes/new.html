@@ -1,0 +1,23 @@
+{% extends '__form.html' %}
+
+{% block title %}
+Nuevo Participantes
+{% endblock %}
+
+{% block content-form %}
+<div class="row">
+    <div class="col s12">
+        <a href="{% url 'participante-import' %}" class="waves-effect waves-light btn">
+            <i class=" small material-icons left">add_box</i>Importar Participantes
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{% include 'participantes/__menu.html' %}
+{% endblock %}
+
+{% block legend %}
+Nuevo Participante
+{% endblock %}

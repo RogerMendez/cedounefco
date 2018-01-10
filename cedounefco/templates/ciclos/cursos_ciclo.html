@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Cursos de Ciclo
+{% endblock %}
+
+{% block sidebar %}
+{% include 'ciclos/__menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Curso</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in cursos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ curso.curso }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

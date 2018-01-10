@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Gestiones
+{% endblock %}
+
+{% block sidebar %}
+{% include 'gestiones/__menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col s12">
+    <table class="bordered highlight responsive-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Gestion</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gestion in gestiones %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ gestion.gestion }}</td>
+                    <td>
+                        <a href="{% url 'gestion-select' gestion.id %}">Seleccionar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

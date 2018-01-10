@@ -1,0 +1,37 @@
+<ul class="pagination center-align">
+    {% if paginator.has_prev %}
+        <li>
+            <a href="{% url 'participante-index' %}?page={{ paginator.firstPage }}" class="waves-effect">Inicio</a>
+        </li>
+        <li>
+            <a href="{% url 'participante-index' %}?page={{ paginator.prev_page }}" class="waves-effect">
+                <i class="material-icons">chevron_left</i>
+            </a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <a href="#!">Inicio</a>
+        </li>
+        <li class="disabled">
+            <a href="#!"><i class="material-icons">chevron_left</i></a>
+        </li>
+    {% endif %}
+    {% if paginator.has_next %}
+        <li>
+            <a href="{% url 'participante-index' %}?page={{ paginator.next_page }}" class="waves-effect">
+                <i class="material-icons">chevron_right</i>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'participante-index' %}?page={{ paginator.pages }}" class="waves-effect"> Fin </a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <a href="#!"><i class="material-icons">chevron_right</i></a>
+        </li>
+        <li class="disabled">
+            <a href="#!">FIN</a>
+        </li>
+    {% endif %}
+</ul>
+<h5 class="right-align header">Página: {{paginator.page}} de {{paginator.pages}}</h5>

@@ -1,0 +1,44 @@
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo">UNEFCO| {{ request.session.gestion }}</a>
+        <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+                {% if 'gestiones' in perms %}
+                    <li>
+                        <a href="{% url 'gestion-index' %}">Gestiones</a>
+                    </li>
+                {% endif %}
+                {% if 'oferta' in perms %}
+                    <li>
+                        <a href="{% url 'ciclos-index' %}">Ciclos</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'participante-index' %}">Participantes</a>
+                </li>
+                <li>
+                    <a class='dropdown-button btn btn-floating pulse' href='#' data-activates='dropdown1'>
+                        <i class="large material-icons">mode_edit</i>
+                    </a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li>
+                            <a href="{% url 'logout' %}">Cerrar Sesion</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'user-change-username' %}">Cambiar Usuario</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'user-reset-pass' %}">Cambiar Contraseña</a>
+                        </li>
+                    </ul>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar Sesion</a>
+                </li>
+            {% endif %}
+
+        </ul>
+        {% include '__mobile-menu.html' %}
+    </div>
+</nav>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Participantes
+{% endblock %}
+
+{% block sidebar %}
+{% include 'participantes/__menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        {% include 'includes/__form_get.html' %}
+    </div>
+</div>
+<div class="row">
+<div class="col s12">
+    {% include 'includes/__pagination.html' %}
+    <table class="bordered highlight responsive-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Apellidos</th>
+            <th>Nombre</th>
+            <th>Cedula</th>
+            <th>RDA</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for participante in participantes %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ participante.paterno }} {{ participante.materno }}</td>
+                <td>{{ participante.nombre1 }} {{ participante.nombre2 }}</td>
+                <td>{{ participante.ci }}</td>
+                <td>{{ participante.rda }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'includes/__pagination.html' %}
+</div>
+</div>
+{% endblock %}

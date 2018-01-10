@@ -1,0 +1,25 @@
+<form action="" method="get" class="">{% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="mypadding2 bg-red fg-white margin10 no-margin-right no-margin-left">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ field }}
+                        {{ field.label_tag }}
+                        {% if field.help_text %}
+                            <p class="category">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="waves-effect waves-green btn">
+            <i class="material-icons">search</i>
+        </button>
+    </fieldset>
+</form>

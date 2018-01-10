@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ciclos Formativos
+{% endblock %}
+
+{% block sidebar %}
+{% include 'ciclos/__menu.html' %}
+{% endblock %}
+
+{% block content %}
+{% load helper_oferta %}
+
+<div class="row">
+    <div class="col s12">
+        {% include 'includes/__form_get.html' %}
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <table class="bordered highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ciclo Formatico</th>
+                    <th>Cantidad de Cursos</th>
+                    <th>Gestion</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ciclo in ciclos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ ciclo.ciclo }}</td>
+                        <td>{% cant_cours ciclo %}</td>
+                        <td>{{ ciclo.gestion }}</td>
+                        <td>
+                            <a href="{% url 'ciclo-cursos' ciclo.id %}">
+                                <i class="material-icons">filter_list</i>
+                            </a>
+                            <a href="{% url 'ciclo-delete' ciclo.id %}"class="red-text">
+                                <i class="material-icons">cancel</i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
