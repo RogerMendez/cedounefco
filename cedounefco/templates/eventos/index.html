@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Nuestros Eventos
+{% endblock %}
+
+{% block sidebar %}
+{% include 'eventos/__menu.html' %}
+{% endblock %}
+
+{% block content %}
+{% load helper_evento %}
+
+<div class="row">
+    <div class="col s12">
+        {% include 'includes/__form_get.html' %}
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <table class="bordered highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Evento</th>
+                    <th>Cant. Cursos</th>
+                    <th>Tec. Seguimiento</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventos %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ evento.nombre }}</td>
+                        <td>{% cant_cours evento %}</td>
+                        <td>{{ evento.user.first_name }} {{ evento.user.last_name }}</td>
+                        <td>
+                            <a href="">Detalle</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

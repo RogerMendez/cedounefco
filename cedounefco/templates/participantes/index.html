@@ -16,7 +16,7 @@ Participantes
 </div>
 <div class="row">
 <div class="col s12">
-    {% include 'includes/__pagination.html' %}
+
     <table class="bordered highlight responsive-table">
         <thead>
         <tr>
@@ -36,7 +36,11 @@ Participantes
                 <td>{{ participante.nombre1 }} {{ participante.nombre2 }}</td>
                 <td>{{ participante.ci }}</td>
                 <td>{{ participante.rda }}</td>
-                <td></td>
+                <td>
+                    <a href="{% url 'participante-update' participante.id %}">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

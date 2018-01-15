@@ -25,7 +25,7 @@ SECRET_KEY = '-_us68=s+(y9k8thm@k)+3s&40fbkc&he0!eiou=!cio@x-tcq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.3']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.2']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'oferta',
     'gestiones',
     'participante',
+    'evento',
 ]
 
 MIDDLEWARE = [

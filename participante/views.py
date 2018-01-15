@@ -13,21 +13,28 @@ from django.db.models import ProtectedError
 from cedounefco.paginator import Paginate
 from cedounefco.general_utility import admin_log_addition, admin_log_change
 from participante.models import Participante
-from participante.form import ParticipanteForm
+from participante.form import ParticipanteForm, ParticipanteSearch
 import xlrd
 import os
 
 @login_required(login_url='/login/')
 def index(request):
-    participantes = Participante.objects.all()
+    ci = ''
+    materno = ''
+    paterno = ''
+    form = ParticipanteSearch(request.GET or None)
+    if form.is_valid():
+        ci = form.cleaned_data['ci']
+        paterno = form.cleaned_data['paterno']
+        materno = form.cleaned_data['materno']
+    participantes = Participante.objects.filter(ci__icontains=ci, paterno__icontains=paterno, materno__icontains=materno)
     pag = Paginate(request, participantes, 50)
-
-
     return render(request, 'participantes/index.html', {
         'participantes':pag['queryset'],
         'posts': pag['queryset'],
         'totPost': participantes,
-        'paginator': pag
+        'paginator': pag,
+        'form':form,
     })
 
 @permission_required('participantes.add_participantes', login_url='/login/')
@@ -78,3 +85,20 @@ def import_participante(request):
     sms = 'Se Importaron %s Participantes' % total
     messages.success(request, sms)
     return HttpResponseRedirect(reverse(new))
+
+@permission_required('participantes.change_participantes', login_url='/login/')
+def update_participante(request, part_id):
+    participante = get_object_or_404(Participante, pk = part_id)
+    if request.method == 'POST':
+        form = ParticipanteForm(request.POST, instance=participante)
+        if form.is_valid():
+            p = form.save()
+            admin_log_change(request, p, 'Participante Modificado')
+            sms = 'Participantes Modificado Correctamente'
+            messages.warning(request, sms)
+            return HttpResponseRedirect(reverse(index))
+    else:
+        form = ParticipanteForm(instance=participante)
+    return render(request, 'participantes/update.html', {
+        'form':form,
+    })
